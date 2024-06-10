@@ -1,6 +1,8 @@
-const { Schema, Types, model } = require("mongoose");
-const { formatTimestamp } = require("../controllers/reactionController");
+const { Schema, Types } = require("mongoose");
+// import formatTimestamp method for use as a 'getter'
+const { formatTimestamp } = require("../utils/helpers");
 
+// reaction schema will NOT be a model, but a schema for reaction subdocuments within the 'thoughts' collection
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -30,4 +32,5 @@ const reactionSchema = new Schema(
   }
 );
 
+// export the reactionSchema
 module.exports = reactionSchema;

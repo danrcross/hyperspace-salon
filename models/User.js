@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
-const { thoughtSchema } = require("./Thought");
 
+// define userSchema
 const userSchema = new Schema(
   {
     username: {
@@ -25,6 +25,7 @@ const userSchema = new Schema(
         message: (props) => `${props.value} is not a valid email address!`,
       },
     },
+    // two arrays below will hold IDs, but can be expanded by request with .populate() method
     thoughts: [
       {
         type: Schema.Types.ObjectId,
@@ -38,6 +39,7 @@ const userSchema = new Schema(
       },
     ],
   },
+  // settings defined here...
   {
     toJSON: {
       virtuals: true,
@@ -47,10 +49,12 @@ const userSchema = new Schema(
   }
 );
 
+// will add property 'friendCount' that will give the length of the array of friends
 userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-const User = model("users", userSchema);
+// defines the model 'User': applies userSchema as schema for documents in 'users' collection
+const User = model("User", userSchema);
 
 module.exports = User;

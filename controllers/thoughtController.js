@@ -1,4 +1,4 @@
-const { User, Thought, Reaction } = require("../models");
+const { User, Thought } = require("../models");
 
 module.exports = {
   // Get all thoughts
@@ -25,6 +25,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
   // Create a new thought
   async createThought(req, res) {
     try {
@@ -43,6 +44,7 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
+
   // Delete a thought
   async deleteThought(req, res) {
     try {
@@ -55,7 +57,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Update a course
+
+  // Update a thought
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
@@ -72,6 +75,7 @@ module.exports = {
     }
   },
 
+  // add a reaction to thought's reaction array
   async addReaction(req, res) {
     try {
       const reaction = req.body;
@@ -86,6 +90,7 @@ module.exports = {
     }
   },
 
+  // delete a reaction from thought's reaction array
   async deleteReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(

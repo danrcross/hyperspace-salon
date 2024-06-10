@@ -1,6 +1,0 @@
-module.exports = {
-  formatTimestamp(datetime) {
-    const formatted = new Date(datetime).toLocaleString();
-    return formatted;
-  },
-};
