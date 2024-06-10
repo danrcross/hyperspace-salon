@@ -1,4 +1,5 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
+const { formatTimestamp } = require("../controllers/reactionController");
 
 const reactionSchema = new Schema(
   {
@@ -18,11 +19,15 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // use getter method to format timestamp on query
+      get: formatTimestamp,
     },
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+    _id: false,
   }
-  // Schema settings:
-  //This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
 );
 
 module.exports = reactionSchema;
